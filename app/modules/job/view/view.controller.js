@@ -3,29 +3,10 @@
 
     angular
         .module('elogbooks.job')
-        .controller('JobViewController', ['jobResponse','$http', '$state', JobViewController]);
+        .controller('JobViewController', ['jobResponse', JobViewController]);
 
-    function JobViewController(jobResponse, $http, $state) {
+    function JobViewController(jobResponse) {
         var vm = this;
         vm.job = jobResponse;
-        vm.stautsNames = [ 'Open', 'Progress' , 'Closed'];
-
-        vm.update = update;
-
-        function update() {
-            vm.result = {
-                description : vm.job.description,
-                status : vm.job.status
-            };
-            $http.put( 
-                'http://localhost:8001/job/'+ vm.job.id,
-                vm.result
-                
-            ).then(function (response) {
-                alert('Job updated');
-            }, function () {
-                console.log('Request Failed');
-            });
-        }
-    };
+    }
 })();
